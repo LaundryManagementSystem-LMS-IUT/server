@@ -12,6 +12,8 @@ class CreateDeliveriesTable extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->string('email', 100)->primary();
             $table->string('mode_of_transportation', 100)->nullable();
+            $table->string('phone_number', 15)->unique()->nullable();
+            $table->boolean('phone_number_verified')->default(false);
             $table->timestamps();
         });
 

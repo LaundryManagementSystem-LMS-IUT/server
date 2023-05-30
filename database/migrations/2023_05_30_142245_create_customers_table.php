@@ -12,6 +12,8 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->string('email', 100)->primary();
+            $table->string('phone_number', 15)->unique()->nullable();
+            $table->boolean('phone_number_verified')->default(false);
             $table->timestamps();
         });
 

@@ -13,9 +13,7 @@ return new class extends Migration
             $table->string('username', 100);
             $table->string('email', 100)->primary();
             $table->string('profile_picture', 100)->nullable();
-            $table->string('phone_number', 15)->unique()->nullable();
             $table->boolean('email_verified')->default(false);
-            $table->boolean('phone_number_verified')->default(false);
             $table->timestamps();
         });
     }

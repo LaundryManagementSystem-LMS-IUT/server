@@ -13,6 +13,8 @@ class CreateManagersTable extends Migration
         Schema::create('managers', function (Blueprint $table) {
             $table->string('email', 100)->primary();
             $table->string('laundry_name', 100)->nullable();
+            $table->string('phone_number', 15)->unique()->nullable();
+            $table->boolean('phone_number_verified')->default(false);
             $table->time('opening_time')->nullable();
             $table->time('closing_time')->nullable();
             $table->timestamps();
