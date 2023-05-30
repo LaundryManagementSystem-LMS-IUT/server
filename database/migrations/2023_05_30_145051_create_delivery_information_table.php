@@ -9,7 +9,7 @@ class CreateDeliveryInformationTable extends Migration
 
     public function up()
     {
-        Schema::create('delivery_information', function (Blueprint $table) {
+        Schema::create('delivery_informations', function (Blueprint $table) {
             $table->string('order_id', 100);
             $table->string('delivery_email', 100);
 
@@ -25,6 +25,6 @@ class CreateDeliveryInformationTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('delivery_information');
+        Schema::dropIfExists('delivery_informations');
     }
 }

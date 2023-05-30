@@ -9,7 +9,7 @@ class CreateChatSenderTable extends Migration
 
     public function up()
     {
-        Schema::create('chat_sender', function (Blueprint $table) {
+        Schema::create('chat_senders', function (Blueprint $table) {
             $table->string('message_id', 100)->primary();
             $table->string('sender_email', 100);
 
@@ -23,6 +23,6 @@ class CreateChatSenderTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('chat_sender');
+        Schema::dropIfExists('chat_senders');
     }
 }

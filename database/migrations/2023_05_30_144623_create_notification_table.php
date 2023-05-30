@@ -9,14 +9,14 @@ class CreateNotificationTable extends Migration
  
     public function up()
     {
-        Schema::create('notification', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->string('notification_id', 100)->primary();
             $table->string('email', 100);
             $table->text('message');
             $table->timestamps();
         });
 
-        Schema::table('notification', function (Blueprint $table) {
+        Schema::table('notifications', function (Blueprint $table) {
             $table->foreign('email')->references('email')->on('users');
         });
     }
@@ -24,6 +24,6 @@ class CreateNotificationTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('notification');
+        Schema::dropIfExists('notifications');
     }
 }

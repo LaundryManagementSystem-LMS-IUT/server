@@ -10,7 +10,7 @@ class CreateBillingTable extends Migration
 
     public function up()
     {
-        Schema::create('billing', function (Blueprint $table) {
+        Schema::create('billings', function (Blueprint $table) {
             $table->string('order_id', 100)->primary();
             $table->string('phone_number', 15);
             $table->string('payment_method', 10);
@@ -20,15 +20,15 @@ class CreateBillingTable extends Migration
         });
 
         // Add explicit cast for the "address" column
-        DB::statement('ALTER TABLE billing
+        DB::statement('ALTER TABLE billings
         ADD COLUMN address ADDRESS_TYPE');
-        DB::statement('ALTER TABLE billing
+        DB::statement('ALTER TABLE billings
         ADD COLUMN full_name FULL_NAME');
     }
 
 
     public function down()
     {
-        Schema::dropIfExists('billing');
+        Schema::dropIfExists('billings');
     }
 }

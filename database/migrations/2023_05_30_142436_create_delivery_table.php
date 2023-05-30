@@ -9,13 +9,13 @@ class CreateDeliveryTable extends Migration
 
     public function up()
     {
-        Schema::create('delivery', function (Blueprint $table) {
+        Schema::create('deliveries', function (Blueprint $table) {
             $table->string('email', 100)->primary();
             $table->string('mode_of_transportation', 100);
             $table->timestamps();
         });
 
-        Schema::table('delivery', function (Blueprint $table) {
+        Schema::table('deliveries', function (Blueprint $table) {
             $table->foreign('email')->references('email')->on('users')->onDelete('cascade');
         });
     }
@@ -23,6 +23,6 @@ class CreateDeliveryTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('delivery');
+        Schema::dropIfExists('deliveries');
     }
 }

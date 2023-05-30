@@ -10,15 +10,15 @@ class CreateCustomerTable extends Migration
 
     public function up()
     {
-        Schema::create('customer', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->string('email', 100)->primary();
             $table->timestamps();
         });
 
-        DB::statement('ALTER TABLE customer
+        DB::statement('ALTER TABLE customers
         ADD COLUMN address ADDRESS_TYPE');
 
-        Schema::table('customer', function (Blueprint $table) {
+        Schema::table('customers', function (Blueprint $table) {
             $table->foreign('email')->references('email')->on('users')->onDelete('cascade');
         });
     }
@@ -26,6 +26,6 @@ class CreateCustomerTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('customer');
+        Schema::dropIfExists('customers');
     }
 }

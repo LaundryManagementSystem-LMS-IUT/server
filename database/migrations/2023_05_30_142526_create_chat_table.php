@@ -9,7 +9,7 @@ class CreateChatTable extends Migration
  
     public function up()
     {
-        Schema::create('chat', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->string('message_id', 100)->primary();
             $table->text('message');
             $table->timestamp('time_of_delivery');
@@ -20,6 +20,6 @@ class CreateChatTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('chat');
+        Schema::dropIfExists('chats');
     }
 }

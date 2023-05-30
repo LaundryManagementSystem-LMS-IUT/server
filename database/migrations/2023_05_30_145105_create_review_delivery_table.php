@@ -9,7 +9,7 @@ class CreateReviewDeliveryTable extends Migration
 
     public function up()
     {
-        Schema::create('review_delivery', function (Blueprint $table) {
+        Schema::create('review_deliveries', function (Blueprint $table) {
             $table->string('delivery_email', 100);
             $table->string('customer_email', 100);
             $table->decimal('review_stars', 3, 1);
@@ -24,6 +24,6 @@ class CreateReviewDeliveryTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('review_delivery');
+        Schema::dropIfExists('review_deliveries');
     }
 }

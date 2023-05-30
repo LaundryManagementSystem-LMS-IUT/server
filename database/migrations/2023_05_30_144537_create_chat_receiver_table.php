@@ -9,7 +9,7 @@ class CreateChatReceiverTable extends Migration
 
     public function up()
     {
-        Schema::create('chat_receiver', function (Blueprint $table) {
+        Schema::create('chat_receivers', function (Blueprint $table) {
             $table->string('message_id', 100)->primary();
             $table->string('receiver_email', 100);
             $table->boolean('read_status')->default(false);
@@ -24,6 +24,6 @@ class CreateChatReceiverTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('chat_receiver');
+        Schema::dropIfExists('chat_receivers');
     }
 }

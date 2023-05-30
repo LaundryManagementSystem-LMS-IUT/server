@@ -9,7 +9,7 @@ class CreateReviewLaundryTable extends Migration
 
     public function up()
     {
-        Schema::create('review_laundry', function (Blueprint $table) {
+        Schema::create('review_laundries', function (Blueprint $table) {
             $table->string('manager_email', 100);
             $table->string('customer_email', 100);
             $table->decimal('review_stars', 3, 1);
@@ -23,6 +23,6 @@ class CreateReviewLaundryTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('review_laundry');
+        Schema::dropIfExists('review_laundries');
     }
 }

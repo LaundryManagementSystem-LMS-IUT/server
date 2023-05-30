@@ -8,19 +8,19 @@ class CreateGoogleOauthTable extends Migration
 {
     public function up()
     {
-        Schema::create('google_oauth', function (Blueprint $table) {
+        Schema::create('google_oauths', function (Blueprint $table) {
             $table->string('email', 100)->primary();
             $table->string('google_id', 200)->unique();
             $table->timestamps();
         });
 
-        Schema::table('google_oauth', function (Blueprint $table) {
+        Schema::table('google_oauths', function (Blueprint $table) {
             $table->foreign('email')->references('email')->on('users')->onDelete('cascade');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('google_oauth');
+        Schema::dropIfExists('google_oauths');
     }
 }

@@ -10,7 +10,7 @@ class CreateManagerTable extends Migration
 
     public function up()
     {
-        Schema::create('manager', function (Blueprint $table) {
+        Schema::create('managers', function (Blueprint $table) {
             $table->string('email', 100)->primary();
             $table->string('laundry_name', 100);
             $table->time('opening_time');
@@ -18,10 +18,10 @@ class CreateManagerTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement('ALTER TABLE manager
+        DB::statement('ALTER TABLE managers
         ADD COLUMN address ADDRESS_TYPE');
 
-        Schema::table('manager', function (Blueprint $table) {
+        Schema::table('managers', function (Blueprint $table) {
             $table->foreign('email')->references('email')->on('users')->onDelete('cascade');
         });
     }
@@ -29,6 +29,6 @@ class CreateManagerTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('manager');
+        Schema::dropIfExists('managers');
     }
 }

@@ -8,7 +8,7 @@ class CreateAddressResolveTable extends Migration
 {
     public function up()
     {
-        Schema::create('address_resolve', function (Blueprint $table) {
+        Schema::create('address_resolves', function (Blueprint $table) {
             $table->double('latitude');
             $table->double('longitude');
             $table->string('formatted_address', 100);
@@ -20,6 +20,6 @@ class CreateAddressResolveTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('address_resolve');
+        Schema::dropIfExists('address_resolves');
     }
 }

@@ -9,7 +9,7 @@ class CreateServiceTable extends Migration
 
     public function up()
     {
-        Schema::create('service', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->string('manager_email', 100);
             $table->string('cloth_type', 50);
             $table->string('operation', 50);
@@ -22,6 +22,6 @@ class CreateServiceTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('service');
+        Schema::dropIfExists('services');
     }
 }
