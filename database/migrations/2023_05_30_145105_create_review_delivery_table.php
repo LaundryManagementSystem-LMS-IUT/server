@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderTable extends Migration
+class CreateReviewDeliveryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateOrderTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->string('order_id', 100)->primary();
+        Schema::create('review_delivery', function (Blueprint $table) {
+            $table->string('delivery_email', 100);
             $table->string('customer_email', 100);
-            $table->string('manager_email', 100);
-            $table->enum('status', ['PENDING', 'COMPLETED', 'DELIVERING', 'DELIVERED', 'PROCESSING', 'COLLECTING', 'CANCELLED']);
+            $table->decimal('review_stars', 3, 1);
+            $table->text('review');
 
+            $table->primary(['delivery_email', 'customer_email']);
+            $table->foreign('delivery_email')->references('email')->on('delivery')->onDelete('cascade');
             $table->foreign('customer_email')->references('email')->on('customer')->onDelete('cascade');
-            $table->foreign('manager_email')->references('email')->on('manager')->onDelete('cascade');
-
-            $table->timestamps();
         });
     }
 
@@ -33,6 +32,6 @@ class CreateOrderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('review_delivery');
     }
 }

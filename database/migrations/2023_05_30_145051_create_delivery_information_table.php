@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateDeliveryInformationTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('delivery_information', function (Blueprint $table) {
+            $table->string('order_id', 100);
+            $table->string('delivery_email', 100);
+
+            $table->primary(['order_id', 'status']);
+            $table->foreign('delivery_email')->references('email')->on('delivery')->onDelete('cascade');
+            $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
+
+            $table->enum('status', ['COMPLETED', 'DELIVERING', 'DELIVERED', 'COLLECTING', 'CANCELLED']);
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('delivery_information');
+    }
+}
