@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateGoogleOauthTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('google_oauth', function (Blueprint $table) {
@@ -24,11 +19,6 @@ class CreateGoogleOauthTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('google_oauth');

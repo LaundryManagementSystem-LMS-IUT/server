@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateReviewLaundryTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('review_laundry', function (Blueprint $table) {
@@ -25,11 +21,6 @@ class CreateReviewLaundryTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('review_laundry');

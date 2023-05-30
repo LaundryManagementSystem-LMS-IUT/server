@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePasswordAuthTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('password_auth', function (Blueprint $table) {
@@ -24,11 +19,6 @@ class CreatePasswordAuthTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('password_auth');
