@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class google_oauth extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'email';
+    public $incrementing = false;
+    protected $fillable = [
+        'email',
+        'google_id'
+    ];
 }

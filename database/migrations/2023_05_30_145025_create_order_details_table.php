@@ -18,9 +18,9 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('quantity');
 
             $table->primary(['order_id', 'cloth_type', 'operation']);
-            $table->foreign('manager_email')->references('email')->on('manager')->onDelete('cascade');
+            $table->foreign('manager_email')->references('email')->on('managers')->onDelete('cascade');
             $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
-            $table->foreign(['manager_email', 'cloth_type', 'operation'])->references(['manager_email', 'cloth_type', 'operation'])->on('service')->onDelete('cascade');
+            $table->foreign(['manager_email', 'cloth_type', 'operation'])->references(['manager_email', 'cloth_type', 'operation'])->on('services')->onDelete('cascade');
         });
     }
 

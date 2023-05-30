@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChatSenderTable extends Migration
+class CreateChatSendersTable extends Migration
 {
 
     public function up()
@@ -13,7 +13,7 @@ class CreateChatSenderTable extends Migration
             $table->string('message_id', 100)->primary();
             $table->string('sender_email', 100);
 
-            $table->foreign('message_id')->references('message_id')->on('chat')->onDelete('cascade');
+            $table->foreign('message_id')->references('message_id')->on('chats')->onDelete('cascade');
             $table->foreign('sender_email')->references('email')->on('users');
 
             $table->timestamps();

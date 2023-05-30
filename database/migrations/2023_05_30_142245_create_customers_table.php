@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreateCustomerTable extends Migration
+class CreateCustomersTable extends Migration
 {
 
     public function up()
@@ -16,7 +16,7 @@ class CreateCustomerTable extends Migration
         });
 
         DB::statement('ALTER TABLE customers
-        ADD COLUMN address ADDRESS_TYPE');
+        ADD COLUMN address ADDRESS_TYPE NULL');
 
         Schema::table('customers', function (Blueprint $table) {
             $table->foreign('email')->references('email')->on('users')->onDelete('cascade');

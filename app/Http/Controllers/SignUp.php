@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\password_auth;
+use App\Models\user;
 use Illuminate\Http\Request;
 
 class SignUp extends Controller
@@ -9,8 +11,11 @@ class SignUp extends Controller
 
     public function store(Request $request)
     {
-        
-        return $request;
+        $user=user::create([
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+        ]);
+        return $user;
     }
 
     public function show($id)

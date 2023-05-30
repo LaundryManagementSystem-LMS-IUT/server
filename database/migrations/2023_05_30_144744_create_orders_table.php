@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderTable extends Migration
+class CreateOrdersTable extends Migration
 {
 
     public function up()
@@ -15,8 +15,8 @@ class CreateOrderTable extends Migration
             $table->string('manager_email', 100);
             $table->enum('status', ['PENDING', 'COMPLETED', 'DELIVERING', 'DELIVERED', 'PROCESSING', 'COLLECTING', 'CANCELLED']);
 
-            $table->foreign('customer_email')->references('email')->on('customer')->onDelete('cascade');
-            $table->foreign('manager_email')->references('email')->on('manager')->onDelete('cascade');
+            $table->foreign('customer_email')->references('email')->on('customers')->onDelete('cascade');
+            $table->foreign('manager_email')->references('email')->on('managers')->onDelete('cascade');
 
             $table->timestamps();
         });
