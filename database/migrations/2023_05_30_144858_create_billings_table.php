@@ -15,6 +15,7 @@ class CreateBillingsTable extends Migration
             $table->string('phone_number', 15);
             $table->string('payment_method', 10);
             $table->double('amount');
+            $table->string('payment_status');
 
             $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
         });
