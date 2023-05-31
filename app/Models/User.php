@@ -14,9 +14,7 @@ class user extends Model
         'username',
         'email',
         'profile_picture',
-        'phone_number', 
         'email_verified',
-        'phone_number_verified',
         'created_at',
         'updated_at'
     ];
