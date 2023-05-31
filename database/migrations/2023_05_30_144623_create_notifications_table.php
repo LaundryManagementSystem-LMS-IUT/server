@@ -13,6 +13,7 @@ class CreateNotificationsTable extends Migration
             $table->string('notification_id', 100)->primary();
             $table->string('email', 100);
             $table->text('message');
+            $table->boolean('read');
             $table->timestamps();
         });
 
