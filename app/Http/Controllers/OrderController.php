@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\service;
 use App\Models\order;
 use App\Models\manager;
-use App\Models\order_detail;
 use Illuminate\Support\Facades\Log;
 
 
@@ -104,52 +103,69 @@ class OrderController extends Controller
 
 
     public function updatePricing(Request $request)
-    {
-        try {
-            $managerEmail = $request->input('manager_email');
-            $pricing = $request->input('pricing');
-            
-            Log::info($pricing);
+{
+    try {
+        $managerEmail = $request->input('manager_email');
+        $pricing = $request->input('pricing');
+        if ($pricing !== null) {
             $pricingCount = count($pricing);
-            for ($i = 0; $i < $pricingCount; $i++) {
-                $price = $pricing[$i];
-                $clothType = $price['ClothType'];
-                $wash = $price['Wash'];
-                $iron = $price['Iron'];
-                $washAndIron = $price['WashAndIron'];
-                $dryClean = $price['DryClean'];
-                
-                $this->updateServicePrice($managerEmail, $clothType, 'Wash', $wash);
-                $this->updateServicePrice($managerEmail, $clothType, 'Wash & Iron', $washAndIron);
-                $this->updateServicePrice($managerEmail, $clothType, 'Dry Clean', $dryClean);
-                $this->updateServicePrice($managerEmail, $clothType, 'Iron', $iron);
-            }
-
-            
-            return response()->json(['message' => 'Pricing updated successfully']);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        } else {
+            $pricingCount = 0;
         }
+        Log::info($pricing);
+        foreach ($pricing as $price) {
+            Log::info('1');
+            $clothType = $price['ClothType'];
+            Log::info('2');
+            $wash = $price['Wash'];
+            Log::info('3');
+            $iron = $price['Iron'];
+            Log::info('4');
+            $washAndIron = $price['WashAndIron'];
+            Log::info('5');
+            $dryClean = $price['DryClean'];
+            Log::info('6');
+            
+            $this->updateServicePrice($managerEmail, $clothType, 'Wash', $wash);
+            Log::info('7');
+            $this->updateServicePrice($managerEmail, $clothType, 'Wash & Iron', $washAndIron);
+            Log::info('8');
+            $this->updateServicePrice($managerEmail, $clothType, 'Dry Clean', $dryClean);
+            Log::info('9');
+            $this->updateServicePrice($managerEmail, $clothType, 'Iron', $iron);
+            Log::info('10');
+        }
+
+
+        return response()->json(['message' => 'Pricing updated successfully']);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
     }
+}
 
     private function updateServicePrice($managerEmail, $clothType, $operation, $price)
     {
         
-        try{$item = service::where('manager_email', $managerEmail)
+        try{
+            $item = service::where('manager_email', $managerEmail)
             ->where('cloth_type', $clothType)
             ->where('operation', $operation)
             ->first();
-        
         if ($item) {
-            $item->price = $price;
-            $item->save();
+            Log::info('11');
+            $newItem = service::where('manager_email', $managerEmail)
+            ->where('cloth_type', $clothType)
+            ->where('operation', $operation)
+            ->update(['price' => $price]);
+            // $item['price'] = $price;
+            // $item->update();
         } else {
-            $item = new service();
-            $item->manager_email = $managerEmail;
-            $item->cloth_type = $clothType;
-            $item->operation = $operation;
-            $item->price = $price;
-            $item->save();
+            $another = new service();
+            $another->manager_email = $managerEmail;
+            $another->cloth_type = $clothType;
+            $another->operation = $operation;
+            $another->price = $price;
+            $another->save();
         }}catch (\Exception $e) {
             Log::info("Error is ");
             Log::info($e);
