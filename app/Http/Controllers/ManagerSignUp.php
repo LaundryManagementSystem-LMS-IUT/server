@@ -31,4 +31,15 @@ class ManagerSignUp extends Controller
             return response()->json(['error' => 'An error occurred '.$e->getMessage()], 400);
         }
     }
+
+    public function show($laundry_id){
+         try{
+           $result=manager::where('laundry_id',$laundry_id)->first();
+           return response()->json(['laundry'=>$result],200);
+         }
+         catch(Exception $e){
+            Log::error('An error occurred: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred '.$e->getMessage()], 400);
+         }
+    }
 }

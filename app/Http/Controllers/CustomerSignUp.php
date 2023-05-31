@@ -28,4 +28,15 @@ class CustomerSignUp extends Controller
             return response()->json(['error' => 'An error occurred '.$e->getMessage()], 400);
         }
     }
+
+    public function show($email){
+        try{
+          $result=user::where('email',$email)->select('username','profile_picture','email')->first();
+          return response()->json(['customer'=>$result],200);
+        }
+        catch(Exception $e){
+           Log::error('An error occurred: ' . $e->getMessage());
+           return response()->json(['error' => 'An error occurred '.$e->getMessage()], 400);
+        }
+   }
 }

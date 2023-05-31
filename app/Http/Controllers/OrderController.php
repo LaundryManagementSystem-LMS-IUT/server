@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\service;
 use App\Models\order;
 use App\Models\manager;
+use Exception;
 use Illuminate\Support\Facades\Log;
 
 
@@ -14,45 +15,48 @@ class OrderController extends Controller
 {
     public function getPricing(string $email)
     {
-        $services = service::where('manager_email', $email)->get();
+        try{
+            $services = service::where('manager_email', $email)->get();
     
-        $groupedServices = $services->groupBy('cloth_type');
-    
-        $responseServices = $groupedServices->map(function ($services, $clothType) {
-            $clothTypeData = [
-                'ClothType' => $clothType,
-                'Wash' => 0,
-                'Iron' => 0,
-                'WashAndIron' => 0,
-                'DryClean' => 0,
-            ];
-    
-            $services->each(function ($service) use (&$clothTypeData) {
-                switch ($service->operation) {
-                    case 'Wash':
-                        $clothTypeData['Wash'] = (double) $service->price;
-                        break;
-                    case 'Iron':
-                        $clothTypeData['Iron'] =(double)  $service->price;
-                        break;
-                    case 'Wash & Iron':
-                        $clothTypeData['WashAndIron'] = (double) $service->price;
-                        break;
-                    case 'Dry Clean':
-                        $clothTypeData['DryClean'] = (double) $service->price;
-                        break;
-                    default:
-                        // Handle any other operations if needed
-                        break;
-                }
-            });
-    
-            return $clothTypeData;
-        })->values(); // Use values() to reset the array keys and get a sequential array
-    
-        $response = response()->json($responseServices);
-    
-        return $response;
+            $groupedServices = $services->groupBy('cloth_type');
+        
+            $responseServices = $groupedServices->map(function ($services, $clothType) {
+                $clothTypeData = [
+                    'ClothType' => $clothType,
+                    'Wash' => 0,
+                    'Iron' => 0,
+                    'WashAndIron' => 0,
+                    'DryClean' => 0,
+                ];
+        
+                $services->each(function ($service) use (&$clothTypeData) {
+                    switch ($service->operation) {
+                        case 'Wash':
+                            $clothTypeData['Wash'] = (double) $service->price;
+                            break;
+                        case 'Iron':
+                            $clothTypeData['Iron'] =(double)  $service->price;
+                            break;
+                        case 'Wash & Iron':
+                            $clothTypeData['WashAndIron'] = (double) $service->price;
+                            break;
+                        case 'Dry Clean':
+                            $clothTypeData['DryClean'] = (double) $service->price;
+                            break;
+                        default:
+                            // Handle any other operations if needed
+                            break;
+                    }
+                });
+        
+                return $clothTypeData;
+            })->values(); // Use values() to reset the array keys and get a sequential array
+        
+            return response()->json($responseServices);
+        }
+        catch(Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     // function getItemPrice(Request $manager_email){
