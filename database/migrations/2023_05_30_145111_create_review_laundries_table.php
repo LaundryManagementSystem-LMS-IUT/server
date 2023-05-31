@@ -14,6 +14,7 @@ class CreateReviewLaundriesTable extends Migration
             $table->string('customer_email', 100);
             $table->decimal('review_stars', 3, 1);
             $table->text('review');
+            $table->timestamps();
 
             $table->primary(['manager_email', 'customer_email']);
             $table->foreign('manager_email')->references('email')->on('managers')->onDelete('cascade');
