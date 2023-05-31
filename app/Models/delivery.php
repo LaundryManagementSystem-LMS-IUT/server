@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class delivery extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'email';
+    public $incrementing = false;
 }

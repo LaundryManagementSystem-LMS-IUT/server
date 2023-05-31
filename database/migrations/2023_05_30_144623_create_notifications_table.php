@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotificationTable extends Migration
+class CreateNotificationsTable extends Migration
 {
  
     public function up()
@@ -13,6 +13,7 @@ class CreateNotificationTable extends Migration
             $table->string('notification_id', 100)->primary();
             $table->string('email', 100);
             $table->text('message');
+            $table->boolean('read');
             $table->timestamps();
         });
 

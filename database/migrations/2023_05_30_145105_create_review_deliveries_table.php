@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReviewDeliveryTable extends Migration
+class CreateReviewDeliveriesTable extends Migration
 {
 
     public function up()
@@ -16,8 +16,8 @@ class CreateReviewDeliveryTable extends Migration
             $table->text('review');
 
             $table->primary(['delivery_email', 'customer_email']);
-            $table->foreign('delivery_email')->references('email')->on('delivery')->onDelete('cascade');
-            $table->foreign('customer_email')->references('email')->on('customer')->onDelete('cascade');
+            $table->foreign('delivery_email')->references('email')->on('deliveries')->onDelete('cascade');
+            $table->foreign('customer_email')->references('email')->on('customers')->onDelete('cascade');
         });
     }
 

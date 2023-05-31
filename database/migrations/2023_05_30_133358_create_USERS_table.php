@@ -12,10 +12,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->string('username', 100);
             $table->string('email', 100)->primary();
-            $table->string('profile_picture', 100);
-            $table->string('phone_number', 15)->unique();
-            $table->boolean('email_verified');
-            $table->boolean('phone_number_verified');
+            $table->string('profile_picture', 100)->nullable();
+            $table->boolean('email_verified')->default(false);
             $table->timestamps();
         });
     }

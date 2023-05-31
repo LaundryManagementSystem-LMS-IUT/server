@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeliveryInformationTable extends Migration
+class CreateDeliveryInformationsTable extends Migration
 {
 
     public function up()
@@ -14,7 +14,7 @@ class CreateDeliveryInformationTable extends Migration
             $table->string('delivery_email', 100);
 
             $table->primary(['order_id', 'status']);
-            $table->foreign('delivery_email')->references('email')->on('delivery')->onDelete('cascade');
+            $table->foreign('delivery_email')->references('email')->on('deliveries')->onDelete('cascade');
             $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
 
             $table->enum('status', ['COMPLETED', 'DELIVERING', 'DELIVERED', 'COLLECTING', 'CANCELLED']);
