@@ -16,6 +16,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string('manager_email', 100);
             $table->boolean('completed');
             $table->integer('quantity');
+            $table->timestamps();
 
             $table->primary(['order_id', 'cloth_type', 'operation']);
             $table->foreign('manager_email')->references('email')->on('managers')->onDelete('cascade');

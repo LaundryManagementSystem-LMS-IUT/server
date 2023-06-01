@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\service;
 use App\Models\order;
-use App\Models\manager;
+use App\Models\order_detail;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -164,37 +164,29 @@ class OrderController extends Controller
         }
     }
 
-    // private function deleteService($managerEmail, $clothType, $operation)
-    // {
-    //     $item = service::where('manager_email', $managerEmail)
-    //         ->where('cloth_type', $clothType)
-    //         ->where('operation', $operation)
-    //         ->first();
-        
-    //     if ($item) {
-    //         $item->price = 0;
-    //     }
-    // }
 
     public function addOrder(Request $request){
         Log::info($request);
-        // name: string; operation: string; quantity: number
-        //payment
-        //customer email and manager email
-
-        //we find manager id
-        // $manager = manager::where('email', $request->input(''))->first();
 
         $order = order::create([
             'customer_email'=>$request->input('customer_email'),
-            'manager_email'=>$request->input('customer_email'),
+            'manager_email'=>$request->input('manager_email'),
             'status'=>'PENDING'
         ]);
         
         $newOrderDetails = $request->input('orderList'); //we get the list
-        
+        $order=order::where('customer_email',$request->input('customer_email'))->where( 'manager_email',$request->input('manager_email'))
+        ->latest()
+    ->first();
         foreach ($newOrderDetails as $newOrderDetail) {
-            //save
+            order_detail::create([
+               'order_id'=>$order->order_id,
+               'cloth_type'=>$newOrderDetail['name'],
+               'operation'=>$newOrderDetail['operation'],
+               'manager_email'=>$request->input('manager_email'),
+               'completed'=>false,
+               'quantity'=>$newOrderDetail['quantity']
+            ]);
         }
         return response()->json(['message' => 'Order added successfully!']);
     }

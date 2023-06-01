@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\address_resolve;
 use App\Http\Controllers\CustomerSignUp;
 use App\Http\Controllers\DeliverySignUp;
 use App\Http\Controllers\Login;
@@ -25,8 +26,10 @@ Route::get('/manager/details/{laundry_id}',[ManagerSignUp::class,'show']);
 Route::get('/customer/details/{email}',[CustomerSignUp::class,'show']);
 Route::post('/customer/review',[ReviewLaundry::class,'store']);
 Route::get('/manager/review/{manager_email}',[ReviewLaundry::class,'showAll']);
+Route::get('/laundry',[ManagerSignUp::class,'showAll']);
 Route::post('/customer/get_reviews',[ReviewLaundry::class,'show']);
 Route::post('/notifications/updateStatus', [NotificationController::class, 'updateStatus']);
+Route::post('/address',[address_resolve::class,'show']);
 Route::get('/notifications/latest/{email}', [NotificationController::class, 'showLatest']);
 Route::get('/notifications/all/{email}', [NotificationController::class, 'showAll']);
 Route::post('/notifications/updateStatus', [NotificationController::class, 'updateStatus']);

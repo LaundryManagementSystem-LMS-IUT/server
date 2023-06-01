@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\address_resolve;
 use App\Models\manager;
 use App\Models\user;
 use Exception;
@@ -23,6 +24,11 @@ class ManagerSignUp extends Controller
                 'profile_picture'=>$request->input('profile_picture'),
             ]);
             $location=$request->input('location');
+            address_resolve::create([
+                'latitude'=>$location['lat'],
+                'longitude'=>$location['lng'],
+                'formatted_address'=>$request->input('address')
+            ]);
             DB::statement('UPDATE managers SET address=ROW(' . $location['lat'] . ', ' . $location['lng'] . ')::ADDRESS_TYPE WHERE email=\'' . $email . '\'');
             return response()->json(['userType'=>'manager'], 200);
         }
@@ -41,5 +47,16 @@ class ManagerSignUp extends Controller
             Log::error('An error occurred: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred '.$e->getMessage()], 400);
          }
+    }
+
+    public function showAll(){
+       try{
+        $result = manager::join('users', 'users.email', '=', 'managers.email')->select('profile_picture', 'username', 'address', 'laundry_name','laundry_id')->get();
+        return response()->json(['laundry'=>$result],200);
+       }
+       catch(Exception $e){
+        Log::error('An error occurred: ' . $e->getMessage());
+        return response()->json(['error' => 'An error occurred '.$e->getMessage()], 400);
+       }
     }
 }

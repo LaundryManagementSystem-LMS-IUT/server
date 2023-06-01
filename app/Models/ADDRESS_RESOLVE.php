@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class address_resolve extends Model
 {
     use HasFactory;
+    protected $primary_key=['latitude','longitude'];
+    public $incrementing=false;
+    protected $fillable=[
+       'latitude',
+       'longitude',
+       'formatted_address'
+    ];
 }
