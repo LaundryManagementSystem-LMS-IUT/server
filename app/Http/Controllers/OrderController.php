@@ -184,7 +184,8 @@ class OrderController extends Controller
         $order = order::create([
             'customer_email'=>$request->input('customer_email'),
             'manager_email'=>$request->input('manager_email'),
-            'status'=>'PENDING'
+            'status'=>'PENDING',
+            'payment'=>$request->input('payment'),
         ]);
         
         $newOrderDetails = $request->input('orderList'); //we get the list
