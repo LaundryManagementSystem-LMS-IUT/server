@@ -194,7 +194,7 @@ class OrderController extends Controller
         foreach ($newOrderDetails as $newOrderDetail) {
             order_detail::create([
                'order_id'=>$order->order_id,
-               'cloth_type'=>$newOrderDetail['name'],
+               'cloth_type'=>$newOrderDetail['cloth_type'],
                'operation'=>$newOrderDetail['operation'],
                'manager_email'=>$request->input('manager_email'),
                'completed'=>false,
@@ -202,6 +202,16 @@ class OrderController extends Controller
             ]);
         }
         return response()->json(['message' => 'Order added successfully!']);
+    }
+
+    public function get_services($manager_email){
+        try{
+            $services=service::where('manager_email',$manager_email)->get();
+            return response()->json(['services' => $services]);
+        }
+        catch(Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
 }

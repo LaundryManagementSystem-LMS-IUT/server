@@ -27,6 +27,7 @@ Route::get('/customer/details/{email}',[CustomerSignUp::class,'show']);
 Route::post('/customer/review',[ReviewLaundry::class,'store']);
 Route::get('/manager/review/{manager_email}',[ReviewLaundry::class,'showAll']);
 Route::get('/laundry',[ManagerSignUp::class,'showAll']);
+Route::get('/services/{email}',[OrderController::class,'get_services']);
 Route::post('/customer/get_reviews',[ReviewLaundry::class,'show']);
 Route::post('/notifications/updateStatus', [NotificationController::class, 'updateStatus']);
 Route::post('/address',[address_resolve::class,'show']);
