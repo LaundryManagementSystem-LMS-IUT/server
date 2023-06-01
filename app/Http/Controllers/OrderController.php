@@ -7,6 +7,7 @@ use App\Models\service;
 use App\Models\order;
 use App\Models\order_detail;
 use Exception;
+use App\Models\manager;
 use Illuminate\Support\Facades\Log;
 
 
@@ -111,7 +112,11 @@ class OrderController extends Controller
     try {
         $managerEmail = $request->input('manager_email');
         $pricing = $request->input('pricing');
-        $pricingCount = count($pricing);
+        if ($pricing !== null) {
+            $pricingCount = count($pricing);
+        } else {
+            $pricingCount = 0;
+        }
         Log::info($pricing);
         foreach ($pricing as $price) {
             Log::info('1');
@@ -147,10 +152,18 @@ class OrderController extends Controller
     {
         
         try{
-            
-            $item = service::where('manager_email', $managerEmail)->where('cloth_type', $clothType)->where('operation', $operation)->first();
+            $item = service::where('manager_email', $managerEmail)
+            ->where('cloth_type', $clothType)
+            ->where('operation', $operation)
+            ->first();
         if ($item) {
-            $item['price'] = $price;
+            Log::info('11');
+            $newItem = service::where('manager_email', $managerEmail)
+            ->where('cloth_type', $clothType)
+            ->where('operation', $operation)
+            ->update(['price' => $price]);
+            // $item['price'] = $price;
+            // $item->update();
         } else {
             $another = new service();
             $another->manager_email = $managerEmail;
