@@ -11,6 +11,7 @@ use App\Http\Controllers\SignUp;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReviewLaundry;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderHistoryController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -38,3 +39,5 @@ Route::get('/pricing/{email}', [OrderController::class, 'getPricing']);
 Route::post('/pricing/addItem', [OrderController::class, 'addItem']);
 Route::post('/pricing/updatePricing', [OrderController::class, 'updatePricing']);
 Route::post('/order/addOrder', [OrderController::class, 'addOrder']);
+Route::get('/order/getCustomerHistory/{email}', [OrderHistoryController::class, 'getCustomerOrderHistory']);
+Route::get('/order/getManagerOrderHistory/{email}', [OrderHistoryController::class, 'getManagerOrderHistory']);

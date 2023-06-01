@@ -14,12 +14,12 @@ class ServicesSeeder extends Seeder
     {
         //
         DB::table('services')->insert(
-            [
-            'manager_email' => 'dummymanager@iut-dhaka.edu',
-            'cloth_type' => 'T-Shirt',
-            'operation' => 'Wash',
-            'price' => 5
-            ],
+            // [
+            // 'manager_email' => 'dummymanager@iut-dhaka.edu',
+            // 'cloth_type' => 'T-Shirt',
+            // 'operation' => 'Wash',
+            // 'price' => 5
+            // ],
             [
                 'manager_email' => 'dummymanager@iut-dhaka.edu',
                 'cloth_type' => 'T-Shirt',
@@ -29,7 +29,7 @@ class ServicesSeeder extends Seeder
             [
                 'manager_email' => 'dummymanager@iut-dhaka.edu',
                 'cloth_type' => 'T-Shirt',
-                'operation' => 'Dry Wash',
+                'operation' => 'Wash',
                 'price' => 10
             ],
             [

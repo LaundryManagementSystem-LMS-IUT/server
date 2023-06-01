@@ -13,6 +13,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_id', 100)->primary();
             $table->string('customer_email', 100);
             $table->string('manager_email', 100);
+            $table->double('payment');
             $table->enum('status', ['PENDING', 'COMPLETED', 'DELIVERING', 'DELIVERED', 'PROCESSING', 'COLLECTING', 'CANCELLED']);
 
             $table->foreign('customer_email')->references('email')->on('customers')->onDelete('cascade');
